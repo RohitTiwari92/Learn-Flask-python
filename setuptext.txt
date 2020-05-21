@@ -1,0 +1,10 @@
+/home/rohit/Learn-Flask-python
+
+
+export PYTHONPATH="${PYTHONPATH}:/home/rohit/Learn-Flask-python"
+export FLASK_APP=HelloWorld.py
+
+flask run --host=0.0.0.0
+
+
+ gunicorn -w 3  HelloWorld:app
