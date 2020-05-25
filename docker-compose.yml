@@ -1,19 +1,19 @@
-version: "3.7"
+version: '3'
 
 services:
-
-  flask:
-    build: Dockerfile
-    container_name: flask
+  flaskapi:
+    container_name: flaskapi
     restart: always
-    expose:
-      - 8080
-
-
+    build: ./flaskdocker
+    ports:
+      - "8000:8000"
+    command: gunicorn -w 1 -b 0.0.0.0:8000  HelloWorld:app
+  
   nginx:
-    build: ./Nginx
-    container_name: nginx-gunicorn
+    container_name: nginx
     restart: always
-    expose:
+    build: ./Nginx
+    ports:
       - "80:80"
-
+    depends_on:
+      - flaskapi
